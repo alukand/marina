@@ -128,13 +128,57 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   z-index: 1000;
   height: 80px;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.4s ease;
 }
 
-.navbar.scrolled {
-  background: rgba(15, 15, 15, 0.95);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+.navbar.scrolled,
+.navbar.navbar-solid {
+  background: var(--accent-gold);
+  backdrop-filter: none;
+}
+
+.navbar.scrolled .navbar-logo,
+.navbar.navbar-solid .navbar-logo {
+  color: var(--bg-primary);
+}
+
+.navbar.scrolled .navbar-links li a,
+.navbar.navbar-solid .navbar-links li a {
+  color: var(--bg-primary);
+}
+
+.navbar.scrolled .navbar-links li a:hover,
+.navbar.navbar-solid .navbar-links li a:hover {
+  color: var(--bg-secondary);
+  border-bottom-color: var(--bg-primary);
+}
+
+.navbar.scrolled .navbar-links li a.active,
+.navbar.navbar-solid .navbar-links li a.active {
+  color: var(--bg-primary);
+  border-bottom-color: var(--bg-primary);
+}
+
+.navbar.scrolled .navbar-links li a.nav-cta,
+.navbar.navbar-solid .navbar-links li a.nav-cta {
+  border-color: var(--bg-primary);
+  color: var(--bg-primary);
+}
+
+.navbar.scrolled .navbar-links li a.nav-cta:hover,
+.navbar.navbar-solid .navbar-links li a.nav-cta:hover {
+  background: var(--bg-primary);
+  color: var(--accent-gold);
+}
+
+.navbar.scrolled .hamburger span,
+.navbar.navbar-solid .hamburger span {
+  background: var(--bg-primary);
+}
+
+.navbar.scrolled .hamburger.active span,
+.navbar.navbar-solid .hamburger.active span {
+  background: var(--text-primary);
 }
 
 .navbar-inner {
@@ -152,6 +196,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 400;
   color: var(--text-primary);
   z-index: 1001;
+  transition: color 0.4s ease;
 }
 
 .navbar-links {
