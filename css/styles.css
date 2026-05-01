@@ -212,12 +212,18 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 0 48px;
+}
+
+@media (min-width: 768px) {
+  .navbar-inner {
+    padding: 0 64px;
+  }
 }
 
 @media (min-width: 1024px) {
   .navbar-inner {
-    padding: 0 48px;
+    padding: 0 80px;
   }
 }
 
@@ -225,11 +231,17 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Cormorant Garamond', serif;
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
   color: var(--text-primary);
   z-index: 1001;
   transition: color 0.4s ease;
+}
+
+@media (min-width: 768px) {
+  .navbar-logo {
+    font-size: 18px;
+  }
 }
 
 .navbar-links {
