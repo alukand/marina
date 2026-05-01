@@ -93,10 +93,28 @@
       currentIndex = index;
 
       var item = visible[index];
-      var placeholder = item.querySelector('.placeholder');
-      var bg = placeholder ? placeholder.style.backgroundColor : '#1A1A1A';
-      lightboxImage.style.backgroundColor = bg;
-      lightboxImage.textContent = item.getAttribute('data-title');
+      var imgSrc = item.querySelector('img');
+      lightboxImage.textContent = '';
+      lightboxImage.style.backgroundImage = '';
+      lightboxImage.style.backgroundColor = '';
+
+      if (imgSrc) {
+        var clone = imgSrc.cloneNode(true);
+        clone.removeAttribute('loading');
+        clone.style.width = 'auto';
+        clone.style.height = 'auto';
+        clone.style.maxHeight = '70vh';
+        clone.style.maxWidth = '85vw';
+        clone.style.objectFit = 'contain';
+        lightboxImage.style.backgroundColor = 'var(--bg-secondary)';
+        lightboxImage.appendChild(clone);
+      } else {
+        var placeholder = item.querySelector('.placeholder');
+        var bg = placeholder ? placeholder.style.backgroundColor : '#1A1A1A';
+        lightboxImage.style.backgroundColor = bg;
+        lightboxImage.textContent = item.getAttribute('data-title');
+      }
+
       lightboxTitle.textContent = item.getAttribute('data-title');
       lightboxCredit.textContent = item.getAttribute('data-credit') || '';
       lightboxCategory.textContent = item.getAttribute('data-category-label') || '';
@@ -106,6 +124,10 @@
     }
 
     function closeLightbox() {
+      while (lightboxImage.firstChild) {
+        lightboxImage.removeChild(lightboxImage.firstChild);
+      }
+      lightboxImage.textContent = '';
       lightbox.classList.remove('active');
       document.body.classList.remove('menu-open');
     }
