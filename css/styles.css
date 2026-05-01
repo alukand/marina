@@ -151,7 +151,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   z-index: 1000;
   height: 80px;
-  transition: all 0.4s ease;
+  transition: background 0.4s ease;
 }
 
 .navbar.scrolled,
@@ -209,6 +209,16 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   justify-content: space-between;
   height: 80px;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+@media (min-width: 1024px) {
+  .navbar-inner {
+    padding: 0 48px;
+  }
 }
 
 .navbar-logo {
