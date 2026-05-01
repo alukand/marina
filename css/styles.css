@@ -206,48 +206,24 @@ h1, h2, h3, h4, h5, h6 {
 
 .navbar-inner {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   height: 80px;
   width: 100%;
-  max-width: 1440px;
-  margin: 0 auto;
-  padding-left: 24px !important;
-  padding-right: 24px !important;
-  padding-top: 0;
-  padding-bottom: 0;
-  box-sizing: border-box;
-}
-
-@media (min-width: 768px) {
-  .navbar-inner {
-    padding-left: 48px !important;
-    padding-right: 48px !important;
-  }
-}
-
-@media (min-width: 1024px) {
-  .navbar-inner {
-    padding-left: 80px !important;
-    padding-right: 80px !important;
-  }
+  max-width: none;
+  margin: 0;
+  padding: 0 5%;
 }
 
 .navbar-logo {
   font-family: 'Cormorant Garamond', serif;
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 400;
   color: var(--text-primary);
   z-index: 1001;
   transition: color 0.4s ease;
-}
-
-@media (min-width: 768px) {
-  .navbar-logo {
-    font-size: 18px;
-  }
 }
 
 .navbar-links {
