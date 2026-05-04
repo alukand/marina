@@ -10,14 +10,67 @@ function escUrl(rel) {
   return rel.split("/").map((p) => encodeURIComponent(p)).join("/");
 }
 
+function escapeAttr(s) {
+  return String(s)
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;");
+}
+
 function slugTitle(stem) {
   const s = stem.replace(/_/g, " ").replace(/-/g, " ");
   const parts = s.split(/\s+/).filter(Boolean);
-  return parts.map((p) => {
-    if (/^img$/i.test(p)) return "Img";
-    if (/^\d+$/.test(p)) return p;
-    return p.charAt(0).toUpperCase() + p.slice(1).toLowerCase();
-  }).join(" ");
+  return parts
+    .map((p) => {
+      if (/^img$/i.test(p)) return "Img";
+      if (/^\d+$/.test(p)) return p;
+      return p.charAt(0).toUpperCase() + p.slice(1).toLowerCase();
+    })
+    .join(" ");
+}
+
+function imgDims(aspect) {
+  if (aspect === "16/9") return { w: 1280, h: 720 };
+  if (aspect === "3/4") return { w: 720, h: 960 };
+  return { w: 800, h: 1000 };
+}
+
+function altFrom(cat, credit, stem, title) {
+  const st = stem.toLowerCase();
+  if (st.includes("winters-bone")) {
+    return "Key makeup artist work on Winter's Bone film set — Marina Proctor";
+  }
+  if (st.includes("ayelet-zurer") || st.includes("ayelet")) {
+    return "Red carpet makeup for Ayelet Zurer at Ben Hur premiere by Marina Proctor";
+  }
+  if (st === "fresh.jpg" || stem.toLowerCase() === "fresh") {
+    return "Natural beauty makeup by Los Angeles makeup artist Marina Proctor";
+  }
+  if (st.includes("gq") || st.includes("grooming") || credit.includes("Grooming")) {
+    return "Men's grooming for GQ-style editorial shoot — Marina Proctor makeup artist";
+  }
+  if (cat === "film") {
+    return `Film set makeup continuity — Marina Proctor IATSE Local 706 — ${title}`;
+  }
+  if (cat === "red-carpet") {
+    return `Red carpet makeup artist Los Angeles — Marina Proctor — ${title}`;
+  }
+  if (cat === "trailers") {
+    return `Film trailer preview — TV makeup artist Los Angeles — Marina Proctor — ${title}`;
+  }
+  if (credit.includes("Editorial")) {
+    return `Editorial print makeup Los Angeles — Marina Proctor — ${title}`;
+  }
+  if (credit.includes("Commercial")) {
+    return `Commercial advertising makeup — photoshoot makeup artist LA — Marina Proctor — ${title}`;
+  }
+  if (credit.includes("Grooming")) {
+    return `Men's grooming Los Angeles — Marina Proctor — ${title}`;
+  }
+  if (credit.includes("Beauty")) {
+    return `Natural beauty makeup by Los Angeles makeup artist Marina Proctor — ${title}`;
+  }
+  return `Marina Proctor makeup portfolio — Los Angeles IATSE Local 706 — ${title}`;
 }
 
 function item(cat, rel, credit, label, aspect, span2) {
@@ -25,9 +78,11 @@ function item(cat, rel, credit, label, aspect, span2) {
   const title = slugTitle(stem);
   const span = span2 ? " span-2" : "";
   const src = escUrl(rel);
-  return `          <div class="portfolio-item${span}" data-category="${cat}" data-title="${title}" data-credit="${credit}" data-category-label="${label}">
+  const alt = escapeAttr(altFrom(cat, credit, stem, title));
+  const { w, h } = imgDims(aspect);
+  return `          <div class="portfolio-item${span}" data-category="${cat}" data-title="${escapeAttr(title)}" data-credit="${credit}" data-category-label="${label}">
             <div class="portfolio-thumb" style="aspect-ratio: ${aspect}; overflow: hidden;">
-              <img src="${src}" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+              <img src="${src}" alt="${alt}" width="${w}" height="${h}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
             </div>
             <div class="item-overlay">
               <span class="item-title">${title}</span>
@@ -41,9 +96,13 @@ function trailerItem(vid, title, idx) {
   const thumb = `https://img.youtube.com/vi/${vid}/hqdefault.jpg`;
   const url = `https://www.youtube.com/watch?v=${vid}`;
   const span = idx === 0 ? " span-2" : "";
-  return `          <div class="portfolio-item${span}" data-category="trailers" data-title="${title}" data-credit="" data-category-label="Trailers" data-video-url="${url}">
+  const alt = escapeAttr(
+    `Film trailer preview — hire makeup artist for film and TV — Marina Proctor — ${title}`
+  );
+  const { w, h } = imgDims("16/9");
+  return `          <div class="portfolio-item${span}" data-category="trailers" data-title="${escapeAttr(title)}" data-credit="" data-category-label="Trailers" data-video-url="${url}">
             <div class="portfolio-thumb" style="aspect-ratio: 16/9; overflow: hidden;">
-              <img src="${thumb}" alt="" loading="lazy" referrerpolicy="no-referrer" style="width:100%;height:100%;object-fit:cover;display:block;">
+              <img src="${thumb}" alt="${alt}" width="${w}" height="${h}" loading="lazy" referrerpolicy="no-referrer" style="width:100%;height:100%;object-fit:cover;display:block;">
             </div>
             <div class="item-overlay">
               <span class="item-title">${title}</span>

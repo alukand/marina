@@ -732,6 +732,16 @@ footer.footer {
   color: var(--text-secondary);
 }
 
+.about-preview-text p a {
+  color: var(--accent-gold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.about-preview-text p a:hover {
+  color: var(--accent-champagne);
+}
+
 .about-preview-text .read-more {
   display: inline-block;
   color: var(--accent-gold);
@@ -857,6 +867,11 @@ footer.footer {
   gap: 24px;
   flex-wrap: wrap;
   margin-bottom: 0;
+}
+
+.portfolio-gallery .portfolio-grid-cta {
+  margin-top: 48px;
+  text-align: center;
 }
 
 .portfolio-gallery {
@@ -1128,10 +1143,36 @@ footer.footer {
   margin-bottom: 0;
 }
 
+.about-text a {
+  color: var(--accent-gold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.about-text a:hover {
+  color: var(--accent-champagne);
+}
+
 /* Credits */
 
 .credits-section {
   padding: 80px 0;
+}
+
+.credits-portfolio-cta {
+  margin-top: 32px;
+  font-size: 15px;
+  color: var(--text-secondary);
+}
+
+.credits-portfolio-cta a {
+  color: var(--accent-gold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.credits-portfolio-cta a:hover {
+  color: var(--accent-champagne);
 }
 
 .credit-category {
@@ -1257,6 +1298,16 @@ footer.footer {
   max-width: 520px;
 }
 
+.service-description a {
+  color: var(--accent-gold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.service-description a:hover {
+  color: var(--accent-champagne);
+}
+
 .services-cta {
   padding: 80px 0;
   text-align: center;
@@ -1266,6 +1317,16 @@ footer.footer {
   color: var(--text-secondary);
   font-size: 17px;
   line-height: 1.7;
+}
+
+.services-cta p a {
+  color: var(--accent-gold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.services-cta p a:hover {
+  color: var(--accent-champagne);
 }
 
 .services-cta .btn-outline {
