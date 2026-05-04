@@ -142,6 +142,11 @@
 
     document.querySelectorAll('.portfolio-item').forEach(function (item) {
       item.addEventListener('click', function () {
+        var videoUrl = item.getAttribute('data-video-url');
+        if (videoUrl) {
+          window.open(videoUrl, '_blank', 'noopener,noreferrer');
+          return;
+        }
         var visible = getVisibleItems();
         var idx = visible.indexOf(item);
         if (idx !== -1) openLightbox(idx);
